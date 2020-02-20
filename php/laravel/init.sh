@@ -37,7 +37,7 @@ if [ -n framework ]; then
     # Instala o framework através do composer
     docker-compose exec app composer create-project --prefer-dist laravel/$framework $framework
 
-    # Faz uma cópia o framework na pasta raiz
+    # Faz uma cópia do framework na pasta raiz
     cp -r ./$framework/. ./
 
     # Remove a pasta vazia do framework
