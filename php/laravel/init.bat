@@ -5,10 +5,11 @@
 rem "Executa os containers"
 docker-compose up -d
 
-echo "PHP Frameworks"
-echo "1) Laravel"
-echo "2) Lumen"
-echo "[31mCancelar[0m"
+echo.
+echo PHP Frameworks
+echo 1) Laravel
+echo 2) Lumen
+echo Cancelar
 echo.
 
 set /p option=Qual framework deseja instalar? 
@@ -20,13 +21,13 @@ if "%option%" equ "3" goto cancelar
 echo.
 
 :laravel
-set framework="laravel"
-set framework_title="Laravel"
+set framework=laravel
+set framework_title=Laravel
 goto installer
 
 :lumen
-set framework="laravel"
-set framework_title="Laravel"
+set framework=lumen
+set framework_title=Lumen
 goto installer
 
 :cancelar
@@ -34,16 +35,16 @@ exit
 
 rem "Instala o framework selecionado"
 :installer
-echo "[32mInstalando o %framework_title%[0m"
+echo Instalando o %framework_title%
 
 rem "Instala o framework através do composer"
 docker-compose exec app composer create-project --prefer-dist laravel/%framework% %framework%
 
 rem "Faz uma cópia do framework na pasta raiz"
-xcopy  /H %framework%\* .
+xcopy  /r /e %framework%\* .
 
 rem "Remove a pasta vazia do framework"
-rmdir /S %framework%
+rmdir /q /s %framework%
 echo.
-echo "[32m%framework_title% foi instalado![0m"
+echo %framework_title% foi instalado!
 exit
